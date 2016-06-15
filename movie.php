@@ -16,10 +16,14 @@
   	<p>Release Year - <?=$singlemovie['release_date']?></p>
   	<p><?=$singlemovie['description']?></p>
 
-  	<a href="">Edit Movie</a>
+  	<a href="./?page=movieForm&amp;id=<?=$singlemovie['id']?>">Edit Movie</a>
+
   	<br>
+
   	<a href="./?page=delete&amp;id=<?=$singlemovie['id']?>">Delete Movie</a>
+
   	<br>
+
   	<a href="./">Back to Movies List</a>
 
   </body>

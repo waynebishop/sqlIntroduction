@@ -1,6 +1,6 @@
 <?php
 
-$dbc = new mysqli('localhost', 'root','','sindhu_db');
+$dbc = new mysqli('localhost', 'root','','sqlIntro');
 
 function getMovieList() {
 
@@ -29,7 +29,7 @@ function getSingleMovie() {
 		$id = 2;
 	}
 
-	$sql = "SELECT id, title, description, release_date FROM movies WHERE id ='$id'";
+	$sql = "SELECT id, title, description, release_date, duration FROM movies WHERE id ='$id'";
 
 	$result = $dbc->query($sql);
 
@@ -49,6 +49,23 @@ function deleteMovie() {
 	header("Location:./");
 }
 
+function editMovie() {
+	
+	global $dbc;
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+	}
+	$title=$_POST['title'];
+	$description=$_POST['description'];
+	$rating=$_POST['rating'];
+	$duration=$_POST['duration'];
+	$date=$_POST['release_date'];
+
+	$sql = "UPDATE movies SET title='$title', description='$description', rating='$rating', release_date='$date', duration='$duration' where id='$id'";
+	$result = $dbc->query($sql);
+	header("Location:./?page=movie&id=$id");
+
+}
 
 
 
