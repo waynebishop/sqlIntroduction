@@ -92,13 +92,14 @@ function genreList() {
 
 	$sql="SELECT id, genre FROM genres JOIN movie_genre ON id=genre_id WHERE movie_id = '$id'";
 
-
-
 	$result = $dbc->query($sql);
 
-	$allGenres = $result->fetch_all();
+	$genreArray = [];
 
-	var_dump($allGenres);
+	while($allGenres = $result->fetch_assoc()){
+		$genreArray[]=$allGenres;
+	}
+	return $genreArray;
 
 } 
 
