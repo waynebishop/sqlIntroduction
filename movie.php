@@ -41,7 +41,7 @@ $genres = genreList();
   	<br>
 
     <!-- When this link is clicked, link goes to index page with page = -->
-    <!-- switches to case with Home -->
+    <!-- switches to case with HomeEdit -->
   	<a href="./">Back to Movies List</a>
 
   </body>
