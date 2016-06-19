@@ -36,7 +36,7 @@ if(isset($_GET['id'])) {
 			<option value="PGR">PGR</option>
 			<option value="R">R</option>
 			<option value="M">M</option>
-			<option value-"G">G</option>
+			<option value="G">G</option>
 		</select>	
 	</div>
 
@@ -49,6 +49,7 @@ if(isset($_GET['id'])) {
 		<label>Duration</label>
 		<input type="number" name="duration" value="<?=$singlemovie['duration']?>">	
 	</div>
+	
 	<button type="submit">Submit</button>
 
 </body>

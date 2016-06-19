@@ -17,9 +17,9 @@ $genres = genreList();
   	<p>Release Year - <?=$singlemovie['release_date']?></p>
   	<p><?=$singlemovie['description']?></p>
     <p>Duration - <?=$singlemovie['duration']?> Minutes</p>
+    <p>Rating - <?=$singlemovie['rating']?></p>
     <?php
-    // var_dump($genres);
-    // var_dump($genre);
+    
     foreach ($genres as $genre) {
         echo "<strong><span>". $genre['genre'] ."&nbsp;</span></strong>"; 
       }

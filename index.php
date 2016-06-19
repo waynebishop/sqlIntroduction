@@ -1,7 +1,7 @@
 <?php
 
-include "database.php";
-// include "db_pdo.php";
+// include "database.php";
+include "db_pdo.php";
 $movies = getMovieList();
 $singlemovie = getSingleMovie();
 

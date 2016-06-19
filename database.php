@@ -37,6 +37,7 @@ function getSingleMovie() {
 	return $singlemovie;
 
 }
+
 function deleteMovie() {
 	global $dbc;
 	if(isset($_GET['id'])){

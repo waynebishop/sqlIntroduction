@@ -26,16 +26,17 @@ function getMovieList() {
 	return $movieArray;
 
 }
+
 function getSingleMovie() {
 	global $dbc;
 
-	if(isset($get['id'])){
+	if(isset($_GET['id'])){
 		$id = $_GET['id'];
 	} else {
 		$id = null;
 	}
 
-	$sql = "SELECT id,title,description, release_date, duration FROM movies WHERE id =:id";
+	$sql = "SELECT id,title,description, release_date, duration, rating FROM movies WHERE id =:id";
 
 	$statement = $dbc->prepare($sql);
 	$statement->bindValue(":id", $id);
@@ -43,6 +44,62 @@ function getSingleMovie() {
 
 	$singlemovie = $statement->fetch(PDO::FETCH_ASSOC);
 	return $singlemovie;
+}
+
+function deleteMovie() {
+	global $dbc;
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+	} 
+
+	$sql = "DELETE FROM movies WHERE id =:id";
+
+	$statement = $dbc->prepare($sql);
+	$statement->bindValue(":id", $id);
+	$statement->execute();
+
+	header("Location:./");
+}
+
+function editMovie() {
+	
+	global $dbc;
+	
+	// Obtain all information from $_POST
+	$id = $_POST['id'];
+	$title=$_POST['title'];
+	$description=$_POST['description'];
+	$rating=$_POST['rating'];
+	$duration=$_POST['duration'];
+	$date=$_POST['release_date'];
+
+	$sql = "UPDATE movies SET title='$title', description='$description', rating='$rating', release_date='$date', duration='$duration' where id=:id";
+	
+	$statement = $dbc->prepare($sql);
+	$statement->bindValue(":id", $id);
+	$statement->execute();
+
+	header("Location:./?page=movie&id=$id");
+
+}
+
+function addMovie() {
+
+	global $dbc;
+	// Obtaining all values from the $_POST array
+	$title=$_POST['title'];
+	$description=$_POST['description'];
+	$rating=$_POST['rating'];
+	$duration=$_POST['duration'];
+	$date=$_POST['release_date'];
+
+	$sql = "INSERT INTO movies(title, description, rating, duration, release_date) VALUES ('$title','$description','$rating','$duration','$date')";
+
+	$statement = $dbc->prepare($sql);
+	$statement->execute();	
+
+	header("Location:./?page=home");
+
 }
 
 function genreList() {
@@ -57,9 +114,6 @@ function genreList() {
 	$statement->bindValue(":id", $id);
 	$statement->execute();
 
-
-	// $result = $dbc->query($sql);
-
 	$genreArray = [];	
 
 	while($allGenres = $statement->fetch(PDO::FETCH_ASSOC)){
@@ -67,18 +121,7 @@ function genreList() {
 	}
 
 	return $genreArray;
-
 } 
-
-
-
-
-
-
-
-
-
-
 
 
 ?>
