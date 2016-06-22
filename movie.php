@@ -1,5 +1,5 @@
 <?php
-$genres = genreList();
+// $genres = genreList();
 
 ?>
 
