@@ -49,7 +49,7 @@ switch ($page) {
 		break;		
 
 	case 'delete':
-		deleteMovie();
+		Movie::deleteMovie();
 		break;
 
 	default:

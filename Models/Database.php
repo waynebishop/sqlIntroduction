@@ -1,9 +1,9 @@
 <?php
 
-class Database {
-	public $dbc;
+abstract class Database {
+	protected $dbc;
 
-	public function getDatabaseConnection() {
+	protected static function getDatabaseConnection() {
 		$dsn = "mysql:host=localhost;dbname=sqlIntro;charset=utf8";
 		$dbc = new PDO($dsn, 'root', '');
 		// The below attributes must be set for PDO 
@@ -18,7 +18,7 @@ class Database {
 
 		$dbc = $this-> getDatabaseConnection();
 
-		$sql = "SELECT " . implode(",", $this->columns) . " FROM " . $this->tablename;
+		$sql = "SELECT " . implode(",", static::$columns) . " FROM " . static::$tablename;
 
 		$statement = $dbc->prepare($sql);
 
@@ -39,7 +39,7 @@ class Database {
 
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
 
-		$sql = "SELECT " . implode(",", $this->columns) . " FROM " . $this->tablename . " WHERE id=:id";
+		$sql = "SELECT " . implode(",", static::$columns) . " FROM " . static::$tablename . " WHERE id=:id";
 
 		$statement = $dbc->prepare($sql);
 
@@ -49,6 +49,23 @@ class Database {
 
 		$singlerecord = $statement->fetch(PDO::FETCH_ASSOC);
 		return $singlerecord;
+
+	}
+	public function deleteMovie() {
+		
+		$dbc = static::getDatabaseConnection();
+
+		$id = isset($_GET['id']) ? $_GET['id'] : null;
+
+		$sql = "DELETE FROM " . static::$tablename . " WHERE id = :id";
+
+		$statement= $dbc->prepare($sql);
+
+		$statement->bindValue(":id", $id);
+
+		$statement->execute();
+
+		header("Location:./");
 
 	}
 }
