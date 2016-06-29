@@ -30,7 +30,7 @@
     <br>
     <!-- When this link is clicked, link goes to index page with page = -->
     <!-- switches to case with Edit -->
-  	<a href="./?page=movieForm&amp;id=<?=$singlemovie['id']?>">Edit Movie</a>
+  	<a href="./?page=edit&amp;id=<?=$singlemovie['id']?>">Edit Movie</a>
 
   	<br>
 
