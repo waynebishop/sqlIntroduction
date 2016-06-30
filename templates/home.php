@@ -10,7 +10,7 @@
   	
   	<h1>Movies List</h1>
 
-    <a href="./?page=movieForm">Add movie</a>
+    <a href="./?page=add">Add movie</a>
 
     <?php
       foreach ($movies as $movie) {

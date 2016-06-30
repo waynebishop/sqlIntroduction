@@ -23,7 +23,8 @@ switch ($page) {
 		break;
 
 	case 'add':
-		addMovie();
+		$controller = new MoviesController;
+		$controller->add();
 		break;
 
 	case 'edit':

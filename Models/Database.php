@@ -35,7 +35,8 @@ abstract class Database {
 	}
 
 	public function find() {
-		$dbc = $this-> getDatabaseConnection();
+		
+		$dbc = static::getDatabaseConnection();
 
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
 
@@ -66,30 +67,6 @@ abstract class Database {
 		$statement->execute();
 
 	}
-
-	// public static function editMovie() {
-
-	// 	$dbc = static::getDatabaseConnection();
-
-	// 	// Obtain all information from $_POST
-	// 	$id = $_POST['id'];
-	// 	$title=$_POST['title'];
-	// 	$description=$_POST['description'];
-	// 	$rating=$_POST['rating'];
-	// 	$duration=$_POST['duration'];
-	// 	$date=$_POST['release_date'];
-
-	// 	$sql = "UPDATE movies SET title='$title', description='$description', rating='$rating', release_date='$date', duration='$duration' where id=:id";
-		
-	// 	$statement = $dbc->prepare($sql);
-	// 	$statement->bindValue(":id", $id);
-	// 	$statement->execute();
-
-	// 	header("Location:./?page=movie&id=$id");
-
-	// }
-
-
 }
 
 
