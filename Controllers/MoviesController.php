@@ -6,8 +6,13 @@ require "Views/MovieFormView.php";
 class MoviesController extends Controller
 {
 	public function show() {
-		$movie = new Movie;
-		$singlemovie = $movie->find();
+		
+		$singlemovie = new Movie($_GET['id']);
+
+		
+
+		var_dump($singlemovie);
+
 		
 		$view = new MoviesView(compact('singlemovie'));
 		$view->render();
@@ -33,7 +38,4 @@ class MoviesController extends Controller
 		Movie::deleteMovie();
 		header("Location:./");
 	}
-
-	
-
 }

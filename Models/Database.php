@@ -3,6 +3,8 @@
 abstract class Database {
 	protected $dbc;
 
+	
+
 	protected static function getDatabaseConnection() {
 		$dsn = "mysql:host=localhost;dbname=sqlIntro;charset=utf8";
 		$dbc = new PDO($dsn, 'root', '');
