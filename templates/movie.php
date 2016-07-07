@@ -13,11 +13,11 @@
   <body>
   	
   	
-  	<h1><?=$singlemovie['title']?></h1>
-  	<p>Release Year - <?=$singlemovie['release_date']?></p>
-  	<p><?=$singlemovie['description']?></p>
-    <p>Duration - <?=$singlemovie['duration']?> Minutes</p>
-    <p>Rating - <?=$singlemovie['rating']?></p>
+  	<h1><?= $singlemovie->title ?></h1>
+  	<p>Release Year - <?=$singlemovie->release_date ?></p>
+  	<p><?=$singlemovie->description ?></p>
+    <p>Duration - <?=$singlemovie->duration ?> Minutes</p>
+    <p>Rating - <?=$singlemovie->rating ?></p>
     <?php
     
     foreach ($genres as $genre) {

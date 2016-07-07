@@ -9,9 +9,7 @@ class MoviesController extends Controller
 		
 		$singlemovie = new Movie($_GET['id']);
 
-		
-
-		var_dump($singlemovie);
+		// var_dump($singlemovie);
 
 		
 		$view = new MoviesView(compact('singlemovie'));
@@ -19,9 +17,16 @@ class MoviesController extends Controller
 	} 
 
 	public function add() {
-		$view = new MovieFormView();
+		$singlemovie = new Movie;
+		// var_dump($singlemovie);
+		$view = new MovieFormView(compact('singlemovie'));
 		$view->render();
 
+	}
+
+	public function insert() {
+		$movie = new Movie($_POST);
+		$movie->insert();
 	}
 
 	public function edit() {

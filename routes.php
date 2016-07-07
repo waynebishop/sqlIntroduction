@@ -22,9 +22,14 @@ switch ($page) {
 		$controller->show();
 		break;
 
-	case 'add':
+    case 'add':
 		$controller = new MoviesController;
 		$controller->add();
+		break;
+
+	case 'insert':
+		$controller = new MoviesController;
+		$controller->insert();
 		break;
 
 	case 'edit':

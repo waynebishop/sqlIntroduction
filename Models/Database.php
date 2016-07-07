@@ -3,7 +3,30 @@
 abstract class Database {
 	protected $dbc;
 
-	
+	protected $data = [];
+
+
+	public function __construct($input = null) {
+		if(static::$columns) {
+			
+			foreach (static::$columns as $column) {
+
+				$this->$column = null;
+				// var_dump($this->$column);
+			}
+		}
+
+		if(is_numeric($input)) {
+			$this->find($input);
+			
+		}
+
+		if(is_array($input)) {
+			foreach (static::$columns as $column) {
+				$this->$column = $input[$column];
+			}
+		}	
+	}
 
 	protected static function getDatabaseConnection() {
 		$dsn = "mysql:host=localhost;dbname=sqlIntro;charset=utf8";
@@ -51,9 +74,36 @@ abstract class Database {
 		$statement->execute();
 
 		$singlerecord = $statement->fetch(PDO::FETCH_ASSOC);
-		return $singlerecord;
+		
+		// This bit converts $singlereord into array into an object - data		
+		$this->data = $singlerecord;
+
+		// var_dump($this->data);
 
 	}
+
+	public function insert() {
+
+		$dbc = static::getDatabaseConnection();
+
+		$columns = static::$columns;
+
+		// Find the ID in $columns and set to nill (unset) so DB knows is a new record
+		unset($columns[array_search('id', $columns)]);
+
+		$sql = "INSERT INTO " . static::$tablename ." (" . implode(',', $columns) . ") VALUES (";
+
+		$insertColumns = [];
+		
+		foreach ($columns as $column) {
+			array_push($insertColumns, ":" .$column);						
+			}		
+			
+		$sql .= implode(',', $insertColumns);
+		$sql .= ")";
+
+	}
+
 	public static function deleteMovie() {
 		
 		$dbc = static::getDatabaseConnection();
@@ -69,6 +119,21 @@ abstract class Database {
 		$statement->execute();
 
 	}
+
+	// public function __set($name, $value) {
+
+	// 	if( !in_array($name, static::$columns))
+	// 		$this->data[$name] = $value;
+
+	// }
+
+	public function __get($name) {
+		if( in_array($name, static::$columns)) {
+			return $this->data[$name];
+		} else {
+			echo "Property '$name' is not found in the data variable"; 
+		}
+	} 
 }
 
 
