@@ -37,6 +37,12 @@ switch ($page) {
 		$controller->edit();
 		break;		
 
+	case 'update':
+		$controller = new MoviesController;
+		$controller->update();
+		break;	
+
+
 	case 'delete':
 		$controller = new MoviesController;
 		$controller->delete();
